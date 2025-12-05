@@ -9,9 +9,9 @@ function guardarCarrito(c){
 function agregarAlCarrito(id){
   const productos = [
     {id:1,nombre:"Auriculares Bluetooth",precio:79.90,imagen:"img/producto1.jpg"},
-    {id:2,nombre:"Cargador Rápido 30W",precio:25.90,imagen:"img/producto1.jpg"},
-    {id:3,nombre:"Smartwatch Básico",precio:99.90,imagen:"img/producto1.jpg"},
-    {id:4,nombre:"USB 64GB",precio:15.90,imagen:"img/producto1.jpg"}
+    {id:2,nombre:"Cargador Rápido 30W",precio:25.90,imagen:"img/producto2.jpg"},
+    {id:3,nombre:"Smartwatch Básico",precio:99.90,imagen:"img/producto3.jpg"},
+    {id:4,nombre:"USB 64GB",precio:15.90,imagen:"img/producto4.jpg"}
   ];
 
   const prod = productos.find(p=>p.id===id);
