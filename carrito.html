@@ -58,16 +58,25 @@
   <script src="js/funciones.js"></script>
 
   <script>
-    function mostrarCarrito(){
+    function obtenerCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito"));
+      return carrito ? carrito : [];
+    }
+
+    function guardarCarrito(carrito) {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+
+    function mostrarCarrito() {
       const cont = document.getElementById("lista-carrito");
       const carrito = obtenerCarrito();
 
       cont.innerHTML = "";
 
-      if(carrito.length === 0){
+      if (carrito.length === 0) {
         cont.innerHTML = "<p>No hay productos en el carrito.</p>";
       } else {
-        carrito.forEach(item=>{
+        carrito.forEach(item => {
           cont.innerHTML += `
             <div class="d-flex align-items-center bg-white shadow-sm p-2 rounded mb-2">
               <img src="${item.imagen}" class="me-3" style="width:70px;height:50px;object-fit:cover;">
@@ -88,11 +97,41 @@
       actualizarContador();
     }
 
-    document.getElementById("comprar").addEventListener("click", ()=>{
+    function actualizarContador() {
+      const carrito = obtenerCarrito();
+      const contador = document.getElementById("contador");
+      contador.textContent = carrito.length;
+    }
+
+    function calcularTotal() {
+      const carrito = obtenerCarrito();
+      let total = 0;
+      carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+      });
+      document.getElementById("total").textContent = total.toFixed(2);
+    }
+
+    function quitarDelCarrito(id) {
+      let carrito = obtenerCarrito();
+      carrito = carrito.filter(item => item.id !== id);
+      guardarCarrito(carrito);
+      mostrarCarrito();
+    }
+
+    document.getElementById("comprar").addEventListener("click", () => {
       localStorage.removeItem("carrito");
       mostrarCarrito();
       alert("Compra realizada con éxito");
     });
+
+    if (localStorage.getItem("carrito") === null) {
+      const carritoInicial = [
+        { id: 1, nombre: "Producto 1", cantidad: 1, precio: 25.50, imagen: "https://via.placeholder.com/70x50" },
+        { id: 2, nombre: "Producto 2", cantidad: 2, precio: 15.75, imagen: "https://via.placeholder.com/70x50" }
+      ];
+      guardarCarrito(carritoInicial);
+    }
 
     mostrarCarrito();
   </script>
