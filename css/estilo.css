@@ -1,0 +1,16 @@
+body{
+  font-family: system-ui, sans-serif;
+}
+
+.logo{
+  height: 45px;
+}
+
+.card img{
+  height: 180px;
+  object-fit: cover;
+}
+
+button, .btn{
+  border-radius: 10px;
+}
